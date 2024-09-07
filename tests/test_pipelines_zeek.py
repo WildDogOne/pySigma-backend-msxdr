@@ -1,6 +1,6 @@
 import pytest
-from sigma.backends.ms_xdr.elasticsearch_lucene import LuceneBackend
-from sigma.pipelines.ms_xdr.zeek import (
+from sigma.backends.kusto.elasticsearch_lucene import LuceneBackend
+from sigma.pipelines.kusto.zeek import (
     ecs_zeek_beats,
     ecs_zeek_corelight,
     zeek_raw,

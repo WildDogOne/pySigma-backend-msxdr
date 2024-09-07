@@ -1,5 +1,5 @@
-from sigma.backends.ms_xdr.elasticsearch_lucene import LuceneBackend
-from sigma.pipelines.ms_xdr.windows import ecs_windows, ecs_windows_old
+from sigma.backends.kusto.elasticsearch_lucene import LuceneBackend
+from sigma.pipelines.kusto.windows import ecs_windows, ecs_windows_old
 from sigma.collection import SigmaCollection
 from sigma.rule import SigmaRule
 
