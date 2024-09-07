@@ -212,7 +212,7 @@ class KustoBackend(TextQueryBackend):
 
     correlation_search_single_rule_expression: ClassVar[str] = "{query}"
     correlation_search_multi_rule_expression: ClassVar[str] = (
-        "from {sources} | where {queries}"
+        "{sources} | where {queries}"
     )
     correlation_search_multi_rule_query_expression: ClassVar[str] = "({query})"
     correlation_search_multi_rule_query_expression_joiner: ClassVar[str] = " or "
@@ -317,4 +317,4 @@ class KustoBackend(TextQueryBackend):
     def finalize_query_default(
         self, rule: SigmaRule, query: str, query_table: int, state: ConversionState
     ) -> str:
-        return f"from {state.processing_state.get('query_table', '*')} | where {query}"
+        return f"{state.processing_state.get('query_table', '*')} | where {query}"
