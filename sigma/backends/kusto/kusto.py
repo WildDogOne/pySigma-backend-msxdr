@@ -213,7 +213,7 @@ class KustoBackend(TextQueryBackend):
     ### Correlation end ###
 
     def finalize_query_default(
-        self, rule: SigmaRule, query: str, index: int, state: ConversionState
+        self, rule: SigmaRule, query: str, query_table: int, state: ConversionState
     ) -> str:
-        return f"from {state.processing_state.get('index', '*')} | where {query}"
+        return f"from {state.processing_state.get('query_table', '*')} | where {query}"
 
