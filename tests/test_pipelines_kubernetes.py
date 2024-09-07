@@ -1,12 +1,12 @@
 from sigma.backends.kusto.elasticsearch_lucene import LuceneBackend
-from sigma.pipelines.kusto.ms_xdr import ms_xdr
+from sigma.pipelines.kusto.kubernetes import ecs_kubernetes
 from sigma.collection import SigmaCollection
 from sigma.rule import SigmaRule
 
 
 def test_ecs_kubernetes():
     assert (
-        LuceneBackend(ms_xdr()).convert(
+        LuceneBackend(ecs_kubernetes()).convert(
             SigmaCollection.from_yaml(
                 """
             title: Test
@@ -30,7 +30,7 @@ def test_ecs_kubernetes():
 
 def test_ecs_kubernetes_apigroup():
     assert (
-        LuceneBackend(ms_xdr()).convert(
+        LuceneBackend(ecs_kubernetes()).convert(
             SigmaCollection.from_yaml(
                 """
             title: Test
@@ -55,7 +55,7 @@ def test_ecs_kubernetes_apigroup():
 
 def test_ecs_kubernetes_capabilities():
     assert (
-        LuceneBackend(ms_xdr()).convert(
+        LuceneBackend(ecs_kubernetes()).convert(
             SigmaCollection.from_yaml(
                 """
             title: Test
@@ -79,7 +79,7 @@ def test_ecs_kubernetes_capabilities():
 
     def test_ecs_kubernetes_subresource():
         assert (
-            LuceneBackend(ms_xdr()).convert(
+            LuceneBackend(ecs_kubernetes()).convert(
                 SigmaCollection.from_yaml(
                     """
             title: Test
@@ -103,7 +103,7 @@ def test_ecs_kubernetes_capabilities():
 
 
 def test_ecs_kubernetes_fields():
-    rule = ms_xdr().apply(
+    rule = ecs_kubernetes().apply(
         SigmaRule.from_yaml(
             """
             title: Test

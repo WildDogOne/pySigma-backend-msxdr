@@ -11,7 +11,7 @@ from sigma.processing.conditions import (
 from sigma.processing.pipeline import ProcessingItem, ProcessingPipeline
 
 
-def ms_xdr() -> ProcessingPipeline:
+def ecs_kubernetes() -> ProcessingPipeline:
     return ProcessingPipeline(
         name="Elastic Common Schema (ECS) Kubernetes audit log mappings",
         priority=30,
