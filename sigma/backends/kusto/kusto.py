@@ -191,7 +191,7 @@ class KustoBackend(TextQueryBackend):
         **kwargs,
     ) -> str:
         sources = [
-            state.processing_state.get("index", "*")
+            state.processing_state.get("query_table", "*")
             for rule_reference in rule.rules
             for state in rule_reference.rule.get_conversion_states()
         ]
