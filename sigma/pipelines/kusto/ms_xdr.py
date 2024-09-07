@@ -48,6 +48,7 @@ def ms_xdr() -> ProcessingPipeline:
                         "md5": ["MD5"],
                         "Hashes": ["SHA1", "SHA256", "MD5"],
                         "ParentProcessId": ["InitiatingProcessId"],
+                        "ParentProcessName": ["InitiatingProcessFileName"],
                         "ParentImage": ["InitiatingProcessFolderPath"],
                         "ParentCommandLine": ["InitiatingProcessCommandLine"],
                         "ParentUser": ["InitiatingProcessAccountName"],
