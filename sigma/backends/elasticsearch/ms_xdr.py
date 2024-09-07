@@ -10,7 +10,7 @@ import re
 import json
 from typing import ClassVar, Dict, Tuple, Pattern, List, Iterable, Optional
 
-class ESQLBackend(TextQueryBackend):
+class KustoBackend(TextQueryBackend):
     """Kusto backend."""
     # TODO: change the token definitions according to the syntax. Delete these not supported by your backend.
     # See the pySigma documentation for further infromation:

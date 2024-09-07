@@ -1,14 +1,14 @@
 import pytest
 from sigma.collection import SigmaCollection
-from sigma.backends.elasticsearch.ms_xdr import ESQLBackend
+from sigma.backends.elasticsearch.ms_xdr import KustoBackend
 
 
 @pytest.fixture
 def esql_backend():
-    return ESQLBackend()
+    return KustoBackend()
 
 
-def test_elasticsearch_esql_and_expression(esql_backend: ESQLBackend):
+def test_elasticsearch_esql_and_expression(esql_backend: KustoBackend):
     assert (
         esql_backend.convert(
             SigmaCollection.from_yaml(
@@ -30,7 +30,7 @@ def test_elasticsearch_esql_and_expression(esql_backend: ESQLBackend):
     )
 
 
-def test_elasticsearch_esql_or_expression(esql_backend: ESQLBackend):
+def test_elasticsearch_esql_or_expression(esql_backend: KustoBackend):
     assert (
         esql_backend.convert(
             SigmaCollection.from_yaml(
@@ -53,7 +53,7 @@ def test_elasticsearch_esql_or_expression(esql_backend: ESQLBackend):
     )
 
 
-def test_elasticsearch_esql_and_or_expression(esql_backend: ESQLBackend):
+def test_elasticsearch_esql_and_or_expression(esql_backend: KustoBackend):
     assert (
         esql_backend.convert(
             SigmaCollection.from_yaml(
@@ -81,7 +81,7 @@ def test_elasticsearch_esql_and_or_expression(esql_backend: ESQLBackend):
     )
 
 
-def test_elasticsearch_esql_or_and_expression(esql_backend: ESQLBackend):
+def test_elasticsearch_esql_or_and_expression(esql_backend: KustoBackend):
     assert (
         esql_backend.convert(
             SigmaCollection.from_yaml(
@@ -108,7 +108,7 @@ def test_elasticsearch_esql_or_and_expression(esql_backend: ESQLBackend):
     )
 
 
-def test_elasticsearch_esql_in_expression(esql_backend: ESQLBackend):
+def test_elasticsearch_esql_in_expression(esql_backend: KustoBackend):
     assert (
         esql_backend.convert(
             SigmaCollection.from_yaml(
@@ -132,7 +132,7 @@ def test_elasticsearch_esql_in_expression(esql_backend: ESQLBackend):
     )
 
 
-def test_elasticsearch_esql_wildcard_expressions(esql_backend: ESQLBackend):
+def test_elasticsearch_esql_wildcard_expressions(esql_backend: KustoBackend):
     assert (
         esql_backend.convert(
             SigmaCollection.from_yaml(
@@ -158,7 +158,7 @@ def test_elasticsearch_esql_wildcard_expressions(esql_backend: ESQLBackend):
     )
 
 
-def test_elasticsearch_esql_regex_query(esql_backend: ESQLBackend):
+def test_elasticsearch_esql_regex_query(esql_backend: KustoBackend):
     assert (
         esql_backend.convert(
             SigmaCollection.from_yaml(
@@ -180,7 +180,7 @@ def test_elasticsearch_esql_regex_query(esql_backend: ESQLBackend):
     )
 
 
-def test_elasticsearch_esql_cidr_query(esql_backend: ESQLBackend):
+def test_elasticsearch_esql_cidr_query(esql_backend: KustoBackend):
     assert (
         esql_backend.convert(
             SigmaCollection.from_yaml(
@@ -201,7 +201,7 @@ def test_elasticsearch_esql_cidr_query(esql_backend: ESQLBackend):
     )
 
 
-def test_elasticsearch_esql_field_name_with_whitespace(esql_backend: ESQLBackend):
+def test_elasticsearch_esql_field_name_with_whitespace(esql_backend: KustoBackend):
     assert (
         esql_backend.convert(
             SigmaCollection.from_yaml(
@@ -221,7 +221,7 @@ def test_elasticsearch_esql_field_name_with_whitespace(esql_backend: ESQLBackend
         == ['from * | where `field name`=="value"']
     )
 
-def test_elasticsearch_esql_ndjson(esql_backend: ESQLBackend):
+def test_elasticsearch_esql_ndjson(esql_backend: KustoBackend):
     """Test for NDJSON output with embedded query string query."""
     rule = SigmaCollection.from_yaml(
         """
@@ -261,7 +261,7 @@ def test_elasticsearch_esql_ndjson(esql_backend: ESQLBackend):
     }
 
 
-def test_elasticsearch_esql_siemrule(esql_backend: ESQLBackend):
+def test_elasticsearch_esql_siemrule(esql_backend: KustoBackend):
     """Test for NDJSON output with embedded query string query."""
     rule = SigmaCollection.from_yaml(
         """
@@ -323,7 +323,7 @@ def test_elasticsearch_esql_siemrule(esql_backend: ESQLBackend):
     }
 
 
-def test_elasticsearch_esql_siemrule_ndjson(esql_backend: ESQLBackend):
+def test_elasticsearch_esql_siemrule_ndjson(esql_backend: KustoBackend):
     """Test for NDJSON output with embedded query string query."""
     rule = SigmaCollection.from_yaml(
         """
@@ -380,7 +380,7 @@ def test_elasticsearch_esql_siemrule_ndjson(esql_backend: ESQLBackend):
     }
 
 
-def test_elasticsearch_esql_siemrule_ndjson_with_threat(esql_backend: ESQLBackend):
+def test_elasticsearch_esql_siemrule_ndjson_with_threat(esql_backend: KustoBackend):
     """Test for NDJSON output with embedded query string query."""
     rule = SigmaCollection.from_yaml(
         """

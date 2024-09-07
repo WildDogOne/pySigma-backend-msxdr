@@ -1,10 +1,10 @@
 import pytest
 from sigma.collection import SigmaCollection
-from sigma.backends.elasticsearch.ms_xdr import ESQLBackend
+from sigma.backends.elasticsearch.ms_xdr import KustoBackend
 from tests.test_backend_elasticsearch_esql import esql_backend
 
 
-def test_event_count_correlation_rule_stats_query(esql_backend: ESQLBackend):
+def test_event_count_correlation_rule_stats_query(esql_backend: KustoBackend):
     correlation_rule = SigmaCollection.from_yaml(
         """
 title: Base rule
@@ -40,7 +40,7 @@ correlation:
 
 
 def test_event_count_correlation_rule_stats_query_no_group_field(
-    esql_backend: ESQLBackend,
+    esql_backend: KustoBackend,
 ):
     correlation_rule = SigmaCollection.from_yaml(
         """

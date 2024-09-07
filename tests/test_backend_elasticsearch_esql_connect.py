@@ -3,7 +3,7 @@ import pytest
 import requests
 import urllib3
 from requests.auth import HTTPBasicAuth
-from sigma.backends.elasticsearch.ms_xdr import ESQLBackend
+from sigma.backends.elasticsearch.ms_xdr import KustoBackend
 from sigma.collection import SigmaCollection
 
 urllib3.disable_warnings()
@@ -315,7 +315,7 @@ def fixture_prepare_es_data():
 
 @pytest.fixture(name="esql_backend")
 def fixture_esql_backend():
-    return ESQLBackend()
+    return KustoBackend()
 
 
 @pytest.mark.skipif(es_available_test() is False, reason="ES not available")
@@ -339,7 +339,7 @@ class TestConnectElasticsearch:
         return rjson
 
     def test_connect_esql_and_expression(
-        self, prepare_es_data, esql_backend: ESQLBackend
+        self, prepare_es_data, esql_backend: KustoBackend
     ):
         rule = SigmaCollection.from_yaml(
             """
@@ -360,7 +360,7 @@ class TestConnectElasticsearch:
         self.query_backend_hits(result_esql, num_wanted=1)
 
     def test_connect_esql_and_expression_empty_string(
-        self, prepare_es_data, esql_backend: ESQLBackend
+        self, prepare_es_data, esql_backend: KustoBackend
     ):
         rule = SigmaCollection.from_yaml(
             """
@@ -381,7 +381,7 @@ class TestConnectElasticsearch:
         self.query_backend_hits(result_esql, num_wanted=1)
 
     def test_connect_esql_or_expression(
-        self, prepare_es_data, esql_backend: ESQLBackend
+        self, prepare_es_data, esql_backend: KustoBackend
     ):
         rule = SigmaCollection.from_yaml(
             """
@@ -402,7 +402,7 @@ class TestConnectElasticsearch:
         self.query_backend_hits(result_esql, num_wanted=1)
 
     def test_connect_esql_and_or_expression(
-        self, prepare_es_data, esql_backend: ESQLBackend
+        self, prepare_es_data, esql_backend: KustoBackend
     ):
         rule = SigmaCollection.from_yaml(
             """
@@ -426,7 +426,7 @@ class TestConnectElasticsearch:
         self.query_backend_hits(result_esql, num_wanted=2)
 
     def test_connect_esql_or_and_expression(
-        self, prepare_es_data, esql_backend: ESQLBackend
+        self, prepare_es_data, esql_backend: KustoBackend
     ):
         rule = SigmaCollection.from_yaml(
             """
@@ -449,7 +449,7 @@ class TestConnectElasticsearch:
         self.query_backend_hits(result_esql, num_wanted=2)
 
     def test_connect_esql_in_expression(
-        self, prepare_es_data, esql_backend: ESQLBackend
+        self, prepare_es_data, esql_backend: KustoBackend
     ):
         rule = SigmaCollection.from_yaml(
             """
@@ -471,7 +471,7 @@ class TestConnectElasticsearch:
         self.query_backend_hits(result_esql, num_wanted=1)
 
     def test_connect_esql_in_expression_empty_string(
-        self, prepare_es_data, esql_backend: ESQLBackend
+        self, prepare_es_data, esql_backend: KustoBackend
     ):
         rule = SigmaCollection.from_yaml(
             """
@@ -492,7 +492,7 @@ class TestConnectElasticsearch:
         self.query_backend_hits(result_esql, num_wanted=1)
 
     def test_connect_esql_wildcard_expressions(
-        self, prepare_es_data, esql_backend: ESQLBackend
+        self, prepare_es_data, esql_backend: KustoBackend
     ):
         rule = SigmaCollection.from_yaml(
             """
@@ -513,7 +513,7 @@ class TestConnectElasticsearch:
         result_esql = esql_backend.convert(rule)[0]
         self.query_backend_hits(result_esql, num_wanted=5)
 
-    def test_connect_esql_regex_query(self, prepare_es_data, esql_backend: ESQLBackend):
+    def test_connect_esql_regex_query(self, prepare_es_data, esql_backend: KustoBackend):
         rule = SigmaCollection.from_yaml(
             """
                 title: Test
@@ -532,7 +532,7 @@ class TestConnectElasticsearch:
         self.query_backend_hits(result_esql, num_wanted=1)
 
     def test_connect_esql_cidr_v4_query(
-        self, prepare_es_data, esql_backend: ESQLBackend
+        self, prepare_es_data, esql_backend: KustoBackend
     ):
         rule = SigmaCollection.from_yaml(
             """
@@ -552,7 +552,7 @@ class TestConnectElasticsearch:
         self.query_backend_hits(result_esql, num_wanted=1)
 
     def test_connect_esql_cidr_v6_query(
-        self, prepare_es_data, esql_backend: ESQLBackend
+        self, prepare_es_data, esql_backend: KustoBackend
     ):
         rule = SigmaCollection.from_yaml(
             """
@@ -573,7 +573,7 @@ class TestConnectElasticsearch:
         result_esql = esql_backend.convert(rule)[0]
         self.query_backend_hits(result_esql, num_wanted=2)
 
-    def test_connect_esql_ip_query(self, prepare_es_data, esql_backend: ESQLBackend):
+    def test_connect_esql_ip_query(self, prepare_es_data, esql_backend: KustoBackend):
         rule = SigmaCollection.from_yaml(
             """
                 title: Test
@@ -592,7 +592,7 @@ class TestConnectElasticsearch:
         self.query_backend_hits(result_esql, num_wanted=1)
 
     def test_connect_esql_field_name_with_whitespace(
-        self, prepare_es_data, esql_backend: ESQLBackend
+        self, prepare_es_data, esql_backend: KustoBackend
     ):
         rule = SigmaCollection.from_yaml(
             """
@@ -610,7 +610,7 @@ class TestConnectElasticsearch:
         result_esql = esql_backend.convert(rule)[0]
         self.query_backend_hits(result_esql, num_wanted=1)
 
-    def test_connect_esql_dot_value(self, prepare_es_data, esql_backend: ESQLBackend):
+    def test_connect_esql_dot_value(self, prepare_es_data, esql_backend: KustoBackend):
         rule = SigmaCollection.from_yaml(
             """
                 title: Test
@@ -629,7 +629,7 @@ class TestConnectElasticsearch:
         self.query_backend_hits(result_esql, num_wanted=1)
 
     def test_connect_esql_space_value_text(
-        self, prepare_es_data, esql_backend: ESQLBackend
+        self, prepare_es_data, esql_backend: KustoBackend
     ):
         rule = SigmaCollection.from_yaml(
             """
@@ -649,7 +649,7 @@ class TestConnectElasticsearch:
         self.query_backend_hits(result_esql, num_wanted=1)
 
     def test_connect_esql_space_value_keyword(
-        self, prepare_es_data, esql_backend: ESQLBackend
+        self, prepare_es_data, esql_backend: KustoBackend
     ):
         rule = SigmaCollection.from_yaml(
             """
@@ -669,7 +669,7 @@ class TestConnectElasticsearch:
         self.query_backend_hits(result_esql, num_wanted=1)
 
     def test_connect_esql_angle_brackets(
-        self, prepare_es_data, esql_backend: ESQLBackend
+        self, prepare_es_data, esql_backend: KustoBackend
     ):
         rule = SigmaCollection.from_yaml(
             r"""
@@ -693,7 +693,7 @@ class TestConnectElasticsearch:
         self.query_backend_hits(result_esql, num_wanted=2)
 
     def test_connect_esql_angle_brackets_single(
-        self, prepare_es_data, esql_backend: ESQLBackend
+        self, prepare_es_data, esql_backend: KustoBackend
     ):
         rule = SigmaCollection.from_yaml(
             r"""
@@ -716,7 +716,7 @@ class TestConnectElasticsearch:
         self.query_backend_hits(result_esql, num_wanted=1)
 
     def test_connect_esql_windash_double(
-        self, prepare_es_data, esql_backend: ESQLBackend
+        self, prepare_es_data, esql_backend: KustoBackend
     ):
         rule = SigmaCollection.from_yaml(
             r"""
@@ -745,7 +745,7 @@ class TestConnectElasticsearch:
         assert all("Sysmon.exe" in entry[2] for entry in result["values"])
 
     def test_connect_esql_advanced_quotetest(
-        self, prepare_es_data, esql_backend: ESQLBackend
+        self, prepare_es_data, esql_backend: KustoBackend
     ):
         rule = SigmaCollection.from_yaml(
             r"""

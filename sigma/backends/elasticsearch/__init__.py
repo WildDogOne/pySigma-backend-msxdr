@@ -1,1 +1,1 @@
-from .ms_xdr import ESQLBackend
+from .ms_xdr import KustoBackend
