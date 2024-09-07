@@ -1,5 +1,5 @@
-from .kubernetes import ecs_kubernetes
+from .ms_xdr import ms_xdr
 
 pipelines = {
-    "ecs_kubernetes": ecs_kubernetes, 
+    "ms_xdr": ms_xdr,
 }
