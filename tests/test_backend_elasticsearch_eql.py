@@ -1,5 +1,5 @@
 import pytest
-from sigma.backends.elasticsearch.elasticsearch_eql import EqlBackend
+from sigma.backends.ms_xdr.elasticsearch_eql import EqlBackend
 from sigma.collection import SigmaCollection
 from sigma.exceptions import SigmaFeatureNotSupportedByBackendError
 

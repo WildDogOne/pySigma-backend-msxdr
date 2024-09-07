@@ -1,6 +1,6 @@
 import pytest
 from sigma.collection import SigmaCollection
-from sigma.backends.elasticsearch.ms_xdr import KustoBackend
+from sigma.backends.ms_xdr.ms_xdr import KustoBackend
 from tests.test_backend_elasticsearch_esql import esql_backend
 
 

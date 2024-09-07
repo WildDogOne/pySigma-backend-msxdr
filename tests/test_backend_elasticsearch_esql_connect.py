@@ -3,7 +3,7 @@ import pytest
 import requests
 import urllib3
 from requests.auth import HTTPBasicAuth
-from sigma.backends.elasticsearch.ms_xdr import KustoBackend
+from sigma.backends.ms_xdr.ms_xdr import KustoBackend
 from sigma.collection import SigmaCollection
 
 urllib3.disable_warnings()

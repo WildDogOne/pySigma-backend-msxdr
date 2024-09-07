@@ -1,5 +1,5 @@
-from sigma.backends.elasticsearch.elasticsearch_lucene import LuceneBackend
-from sigma.pipelines.elasticsearch.kubernetes import ecs_kubernetes
+from sigma.backends.ms_xdr.elasticsearch_lucene import LuceneBackend
+from sigma.pipelines.ms_xdr.kubernetes import ecs_kubernetes
 from sigma.collection import SigmaCollection
 from sigma.rule import SigmaRule
 
