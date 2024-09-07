@@ -3,7 +3,7 @@ import pytest
 import requests
 import urllib3
 from requests.auth import HTTPBasicAuth
-from sigma.backends.elasticsearch.elasticsearch_esql import ESQLBackend
+from sigma.backends.elasticsearch.ms_xdr import ESQLBackend
 from sigma.collection import SigmaCollection
 
 urllib3.disable_warnings()

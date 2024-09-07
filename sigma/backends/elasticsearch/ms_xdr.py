@@ -11,19 +11,16 @@ import json
 from typing import ClassVar, Dict, Tuple, Pattern, List, Iterable, Optional
 
 class ESQLBackend(TextQueryBackend):
-    """ES|QL backend."""
+    """Kusto backend."""
     # TODO: change the token definitions according to the syntax. Delete these not supported by your backend.
     # See the pySigma documentation for further infromation:
     # https://sigmahq-pysigma.readthedocs.io/en/latest/Backends.html
 
     # Operator precedence: tuple of Condition{AND,OR,NOT} in order of precedence.
     # The backend generates grouping if required
-    name : ClassVar[str] = "ES|QL backend"
+    name : ClassVar[str] = "Kusto backend"
     formats : Dict[str, str] = {
-        "default": "Plain ES|QL queries",
-        "kibana_ndjson": "Kibana ES|QL queries in NDJSON Format.",
-        "siem_rule": "Elastic Security ES|QL queries as SIEM Rules in JSON Format.",    
-        "siem_rule_ndjson": "Elastic Security ES|QL queries as SIEM Rules in NDJSON Format."
+        "default": "Plain Kusto queries",
     }
     requires_pipeline : bool = True
 
@@ -126,7 +123,7 @@ class ESQLBackend(TextQueryBackend):
     typing_rule_query_expression: ClassVar[str] = '{query}, "{ruleid}"'
     typing_rule_query_expression_joiner: ClassVar[str] = ", "
 
-    # not yet supported for ES|QL because all queries from correlated rules are combined into one query.
+    # not yet supported for Kusto because all queries from correlated rules are combined into one query.
     #correlation_search_field_normalization_expression: ClassVar[str] = " | rename {field} as {alias}"
     #correlation_search_field_normalization_expression_joiner: ClassVar[str] = ""
 

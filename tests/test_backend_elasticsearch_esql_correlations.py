@@ -1,6 +1,6 @@
 import pytest
 from sigma.collection import SigmaCollection
-from sigma.backends.elasticsearch.elasticsearch_esql import ESQLBackend
+from sigma.backends.elasticsearch.ms_xdr import ESQLBackend
 from tests.test_backend_elasticsearch_esql import esql_backend
 
 
