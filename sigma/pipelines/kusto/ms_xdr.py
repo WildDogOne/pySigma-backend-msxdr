@@ -1,7 +1,6 @@
 from sigma.processing.transformations import (
     FieldMappingTransformation,
-    AddConditionTransformation,
-    DropDetectionItemTransformation,
+    ReplaceStringTransformation,
     SetStateTransformation,
 )
 from sigma.processing.conditions import (
@@ -56,6 +55,18 @@ def ms_xdr() -> ProcessingPipeline:
                 ),
                 rule_conditions=[
                     LogsourceCondition(category="process_creation"),
+                ],
+            ),
+            ProcessingItem(
+                identifier="field_mapping_device_process_events",
+                transformation=ReplaceStringTransformation(regex=".*/", replacement=""),
+                rule_conditions=[
+                    LogsourceCondition(category="process_creation"),
+                ],
+                field_name_conditions=[
+                    IncludeFieldCondition(
+                        fields=["InitiatingProcessFileName"], type="plain"
+                    )
                 ],
             ),
             # DeviceImageLoadEvents
