@@ -226,7 +226,9 @@ class KustoBackend(TextQueryBackend):
     # correlation_search_field_normalization_expression_joiner: ClassVar[str] = ""
 
     event_count_aggregation_expression: ClassVar[Dict[str, str]] = {
-        "stats": "| eval timebucket=date_trunc({timespan}, @timestamp) | stats event_count=count(){groupby}"
+        #"stats": "| eval timebucket=date_trunc({timespan}, @timestamp) | stats event_count=count(){groupby}"
+        #| summarize count() by bin(Timestamp, 60m), SenderFromAddress
+        "stats": "| summarize event_count=count() by bin(Timestamp, {timespan}){groupby},ReportId='N/A'"
     }
     value_count_aggregation_expression: ClassVar[Dict[str, str]] = {
         "stats": "| eval timebucket=date_trunc({timespan}, @timestamp) | stats value_count=count_distinct({field}){groupby}"
@@ -235,20 +237,21 @@ class KustoBackend(TextQueryBackend):
         "stats": "| eval timebucket=date_trunc({timespan}, @timestamp) | stats event_type_count=count_distinct(event_type){groupby}"
     }
 
-    timespan_mapping: ClassVar[Dict[str, str]] = {
-        "s": "seconds",
-        "m": "minutes",
-        "h": "hours",
-        "d": "days",
-        "w": "weeks",
-        "M": "months",
-        "y": "years",
-    }
+    #timespan_mapping: ClassVar[Dict[str, str]] = {
+    #    "s": "seconds",
+    #    "m": "minutes",
+    #    "h": "hours",
+    #    "d": "days",
+    #    "w": "weeks",
+    #    "M": "months",
+    #    "y": "years",
+    #}
     referenced_rules_expression: ClassVar[Dict[str, str]] = {"stats": "{ruleid}"}
     referenced_rules_expression_joiner: ClassVar[Dict[str, str]] = {"stats": ","}
 
     groupby_expression_nofield: ClassVar = {"stats": " by timebucket"}
-    groupby_expression: ClassVar[Dict[str, str]] = {"stats": " by timebucket{fields}"}
+    #groupby_expression: ClassVar[Dict[str, str]] = {"stats": " by timebucket{fields}"} # Not sure if this is needed
+    groupby_expression: ClassVar[Dict[str, str]] = {"stats": " {fields}"}
     groupby_field_expression: ClassVar[Dict[str, str]] = {"stats": ", {field}"}
     groupby_field_expression_joiner: ClassVar[Dict[str, str]] = {"stats": ""}
 
