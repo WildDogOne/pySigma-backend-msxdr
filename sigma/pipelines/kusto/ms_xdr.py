@@ -1,5 +1,7 @@
 from sigma.processing.transformations import (
     FieldMappingTransformation,
+    AddConditionTransformation,
+    DropDetectionItemTransformation,
     ReplaceStringTransformation,
     SetStateTransformation,
 )
@@ -59,15 +61,14 @@ def ms_xdr() -> ProcessingPipeline:
             ),
             ProcessingItem(
                 identifier="field_mapping_device_process_events",
-                transformation=ReplaceStringTransformation(regex=".*/", replacement=""),
+                transformation=ReplaceStringTransformation(
+                    regex=".*/", replacement=""
+                ),
                 rule_conditions=[
                     LogsourceCondition(category="process_creation"),
+                    
                 ],
-                field_name_conditions=[
-                    IncludeFieldCondition(
-                        fields=["InitiatingProcessFileName"], type="plain"
-                    )
-                ],
+                field_name_conditions=[IncludeFieldCondition(fields=["InitiatingProcessFileName"], type="plain")]
             ),
             # DeviceImageLoadEvents
             ProcessingItem(
@@ -204,6 +205,30 @@ def ms_xdr() -> ProcessingPipeline:
                     LogsourceCondition(category="registry_delete"),
                     LogsourceCondition(category="registry_event"),
                     LogsourceCondition(category="registry_set"),
+                ],
+                rule_condition_linking=any,
+            ),
+            # EmailEvents
+            ProcessingItem(
+                identifier="EmailEvents",
+                transformation=SetStateTransformation(
+                    key="query_table", val="EmailEvents"
+                ),
+                rule_conditions=[
+                    LogsourceCondition(category="EmailEvents"),
+                ],
+                rule_condition_linking=any,
+            ),
+            ProcessingItem(
+                identifier="field_mapping_EmailEvents",
+                transformation=FieldMappingTransformation(
+                    mapping={
+                        "EventType": ["ActionType"],
+                        "User": ["InitiatingProcessAccountName"],
+                    }
+                ),
+                rule_conditions=[
+                    LogsourceCondition(category="EmailEvents"),
                 ],
                 rule_condition_linking=any,
             ),
