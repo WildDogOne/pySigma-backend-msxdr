@@ -124,7 +124,7 @@ def ms_xdr() -> ProcessingPipeline:
                         "ProcessId": ["InitiatingProcessId"],
                         "Image": ["InitiatingProcessFolderPath"],
                         "User": ["InitiatingProcessAccountName"],
-                        "FileName": ["InitiatingProcessFileName"]
+                        "FileName": ["InitiatingProcessFileName"],
                         "Protocol": ["Protocol"],
                         "SourceIp": ["LocalIP"],
                         "SourceHostname": ["DeviceName"],
