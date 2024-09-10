@@ -156,7 +156,7 @@ class KustoBackend(TextQueryBackend):
 
     # Field value in list, e.g. "field in (value list)" or "field containsall (value list)"
     convert_or_as_in: ClassVar[bool] = True  # Convert OR as in-expression
-    convert_and_as_in: ClassVar[bool] = True  # Convert AND as in-expression
+    convert_and_as_in: ClassVar[bool] = False # If this is true it has_all will be used, which is nice and quick, leads to different results  # Convert AND as in-expression
     in_expressions_allow_wildcards: ClassVar[bool] = (
         True  # Values in list can contain wildcards. If set to False (default) only plain values are converted into in-expressions.
     )
